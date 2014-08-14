@@ -1,4 +1,4 @@
-x = 0:0.01:1;
+
 imgRGB = imread('beyonce.png');
 figure(1)
 [x,y]=meshgrid(1:15,1:15);
@@ -6,6 +6,7 @@ tri = delaunay(x,y);
 z1 = peaks(15);
 set(gcf, 'Color', [1,1,1]);
 filename = 'testnew.gif';
+
 for n = 1:0.2:5
       z2 = z1.*randn;
     
@@ -13,6 +14,7 @@ for n = 1:0.2:5
          'FaceColor','texturemap',...
          'EdgeColor','none');
       axis([0 15 0 15 -15 15]);
+      camzoom(4);
       axis off;
       drawnow
       frame = getframe(1);
