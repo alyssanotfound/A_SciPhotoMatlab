@@ -5,16 +5,16 @@ figure(1)
 tri = delaunay(x,y);
 z1 = peaks(15);
 set(gcf, 'Color', [1,1,1]);
-filename = 'testnew.gif';
+filename = 'testnew3.gif';
 
-for n = 1:0.2:5
+for n = 1:0.3:5
       z2 = z1.*randn;
     
       h = surf(x,y,z2,flipdim(imgRGB,1),... 
          'FaceColor','texturemap',...
          'EdgeColor','none');
       axis([0 15 0 15 -15 15]);
-      camzoom(4);
+      %camzoom(2);
       axis off;
       drawnow
       frame = getframe(1);

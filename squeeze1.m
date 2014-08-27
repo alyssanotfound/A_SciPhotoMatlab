@@ -1,5 +1,5 @@
 
-function targetimg = squeeze1(img,regionbbox)
+function targetimg = squeeze1(img,regionbbox,amt)
 
 % size of image
 [Nrows, Ncolumns, Nchannels] = size(img);
@@ -14,11 +14,11 @@ yc = regionbbox(1,2)+regionbbox(1,4)/2;
 % find polar coordinates of these pixels
 r = sqrt( (xsource-xc).^2+ (ysource-yc).^2);
 rmax = max(max(r));
-rmax = rmax/2;
+
 theta = atan2(ysource-yc, xsource-xc);
 
 % squeeze coefficients
-a = 0.8; b = 1./1.5;
+a = 1.0; b = 1./(0.5+amt);
 rtilde = rmax*a*((r/rmax).^b);
 
 % back out Cartesian coordinates

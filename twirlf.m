@@ -13,15 +13,14 @@ leyebbox(1,3) = neweyewidth;
 reyebbox = leyebbox;
 reyebbox(1,1) =reyebbox(1,1) + neweyewidth;
 
-%img = insertObjectAnnotation(img,'rectangle',nosebbox,'Nose');
-%img = insertObjectAnnotation(img,'rectangle',leyebbox,'L Eye');
-%img = insertObjectAnnotation(img,'rectangle',reyebbox,'R Eye');
+img = insertObjectAnnotation(img,'rectangle',nosebbox,'Nose');
+img = insertObjectAnnotation(img,'rectangle',leyebbox,'L Eye');
+img = insertObjectAnnotation(img,'rectangle',reyebbox,'R Eye');
 
-[newimg] = bulge1(img,reyebbox);
-[newimg] = bulge1(newimg,leyebbox);
-[newimg] = squeeze1(newimg,nosebbox);
+%last value should be between .1 and 1
+[newimg] = bulge1(img,reyebbox,1);
+[newimg] = bulge1(newimg,leyebbox,1);
+[newimg] = squeeze1(newimg,nosebbox,1);
 
 set(gcf, 'Color', [1,1,1]);
 imshow(newimg); axis equal off; hold on; 
-%squeeze1(img,eyesbbox);
-%squeeze1(img);

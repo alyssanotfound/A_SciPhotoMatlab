@@ -4,10 +4,10 @@ function targetimgf = bulge1(img,regionbbox,amt)
 addx = 50;
 addy = 100;
 
-regionbbox(:,1) = int16(regionbbox(:,1) -(addx/2));
-regionbbox(:,2) = int16(regionbbox(:,2) -(addy/2));
-regionbbox(:,3) = int16(regionbbox(:,3) +addx);
-regionbbox(:,4) = int16(regionbbox(:,4) +addy);
+regionbbox(:,1) = regionbbox(:,1) -(addx/2);
+regionbbox(:,2) = regionbbox(:,2) -(addy/2);
+regionbbox(:,3) = regionbbox(:,3) +addx;
+regionbbox(:,4) = regionbbox(:,4) +addy;
 
 nx = regionbbox(:,1);
 ny = regionbbox(:,2);
@@ -17,7 +17,7 @@ eny = regionbbox(:,2) + regionbbox(:,4);
 img2 = imcrop(img,regionbbox);
 
 % size of image
-[Nrows, Ncolumns, Nchannels] = size(img2)
+[Nrows, Ncolumns, Nchannels] = size(img2);
 
 % center of region to bulge
 %xc = regionbbox(1,1)+regionbbox(1,3)/2;
@@ -57,13 +57,9 @@ targetimg = uint8(targetimg);
 
 targetimgf = img;
 
-size(targetimg(:,:,1))
-size(targetimg(:,:,2))
-size(targetimg(:,:,3))
-
-targetimgf(ny:eny,nx:enx,1) = targetimg(:,:,1);
-targetimgf(ny:eny,nx:enx,2) = targetimg(:,:,2);
-targetimgf(ny:eny,nx:enx,3) = targetimg(:,:,3);
+%targetimgf(nx:enx,ny:eny,1) = targetimg(:,:,1);
+%targetimgf(nx:enx,ny:eny,2) = targetimg(:,:,2);
+%targetimgf(nx:enx,ny:eny,3) = targetimg(:,:,3);
 
 
 % plot before and after
