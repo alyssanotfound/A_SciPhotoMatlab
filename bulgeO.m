@@ -1,5 +1,4 @@
-
-function targetimgf = squeeze1(img,regionbbox,amt)
+function targetimgf = bulge1(img,regionbbox,amt)
 
 addx = 50;
 addy = 100;
@@ -16,27 +15,30 @@ eny = regionbbox(:,2) + regionbbox(:,4);
 
 img2 = imcrop(img,regionbbox);
 
-
 % size of image
-[Nrows, Ncolumns, Nchannels] = size(img2);
+[Nrows, Ncolumns, Nchannels] = size(img2)
 
-% center of image
+% center of region to bulge
 %xc = regionbbox(1,1)+regionbbox(1,3)/2;
 %yc = regionbbox(1,2)+regionbbox(1,4)/2;
 yc = Nrows/2; xc = Ncolumns/2;
 
-% coordinates of source pixels
+% coordinates of source pixels 
 [xsource,ysource] = meshgrid(1:Ncolumns, 1:Nrows);
 
 % find polar coordinates of these pixels
 r = sqrt( (xsource-xc).^2+ (ysource-yc).^2);
-rmax = max(max(r));
 
 theta = atan2(ysource-yc, xsource-xc);
 
-% squeeze coefficients
-a = 1.0; b = 1./(0.5+amt);
-rtilde = rmax*a*((r/rmax).^b);
+% bulge coefficient
+b = 5*amt; c = 0.4; d = 1/100;
+
+% smooth cutoff
+s = 1./(1+exp( b*(c-d*r) ));
+
+% bulge coefficients
+rtilde = r.*s;
 
 % back out Cartesian coordinates
 xtilde = rtilde.*cos(theta) + xc;
@@ -54,13 +56,10 @@ targetimg = uint8(targetimg);
 
 targetimgf = img;
 
+size(targetimg(:,:,1))
+size(targetimg(:,:,2))
+size(targetimg(:,:,3))
 
 targetimgf(ny:eny,nx:enx,1) = targetimg(:,:,1);
 targetimgf(ny:eny,nx:enx,2) = targetimg(:,:,2);
 targetimgf(ny:eny,nx:enx,3) = targetimg(:,:,3);
-
-% plot before and after
-%set(gcf, 'Color', [1,1,1]);
-%subplot(1,2,1); image(img);       axis equal; title('Original', 'FontSize', 18);
-%imshow(targetimg); axis equal off; 
- 

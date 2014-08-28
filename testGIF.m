@@ -7,8 +7,8 @@ z1 = peaks(15);
 set(gcf, 'Color', [1,1,1]);
 filename = 'testnew3.gif';
 
-for n = 1:0.3:5
-      z2 = z1.*randn;
+for n = -3.14:0.2:3.14
+      z2 = z1.*sin(n);
     
       h = surf(x,y,z2,flipdim(imgRGB,1),... 
          'FaceColor','texturemap',...
@@ -20,7 +20,7 @@ for n = 1:0.3:5
       frame = getframe(1);
       im = frame2im(frame);
       [imind,cm] = rgb2ind(im,256);
-      if n == 1;
+      if n == 0;
           imwrite(imind,cm,filename,'gif', 'Loopcount',inf);
       else
           imwrite(imind,cm,filename,'gif','WriteMode','append');
