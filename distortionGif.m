@@ -28,15 +28,15 @@ for n = 1.0:0.5:4.0
       [stitchedimg] = stitchf(stitchedimg,newimg,nx,ny,enx,eny);
       
       ax = 0;
-      ay = 20;
+      ay = 30;
       [croppedimg,nx,ny,enx,eny] = cropf(img,leyebbox,ax,ay);
-      [newimg] = bulge1(croppedimg,n);
+      [newimg] = squeeze1(croppedimg,n);
       [stitchedimg] = stitchf(stitchedimg,newimg,nx,ny,enx,eny);
       
-      ax = 10;
-      ay = 10;
+      ax = 0;
+      ay = 0;
       %[croppedimg,nx,ny,enx,eny] = cropf(img,nosebbox,ax,ay);
-      %[newimg] = bulge1(croppedimg,n);
+      %[newimg] = squeeze1(croppedimg,n);
       %[stitchedimg] = stitchf(stitchedimg,newimg,nx,ny,enx,eny);
       
       imshow(stitchedimg); axis equal off;
