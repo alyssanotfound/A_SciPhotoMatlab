@@ -53,7 +53,7 @@ imageNames = {imageNames.name}';
 disp(imageNames);
 
 outputVideo = VideoWriter(fullfile('newfolder','test_out.avi'));
-outputVideo.FrameRate = 10;
+outputVideo.FrameRate = 30;
 open(outputVideo);
 
 for ii = 1:length(imageNames)
